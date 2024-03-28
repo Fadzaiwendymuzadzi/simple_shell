@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define BUFFER_SIZE 1024
+
+char *custom_getline() {
+    char *buffer = malloc(BUFFER_SIZE * sizeof(char));
+    if (buffer == NULL) {
+        perror("Unable to allocate buffer");
+        exit(1);
+    }
+
+    int c;
+    int i = 0;
+    while ((c = getchar()) != '\n' && c != EOF) {
+        if (i < BUFFER_SIZE - 1) {
+            buffer[i++] = c;
+        } else {
+            // Expand buffer if needed
+            buffer = realloc(buffer, 2 * BUFFER_SIZE);
+            if (buffer == NULL) {
+                perror("Unable to reallocate buffer");
+                exit(1);
+            }
+            buffer[i++] = c;
+        }
+    }
+    buffer[i] = '\0';
+    return buffer;
+}
+
+int main(void) {
+    char *line;
+    while (1) {
+        printf("$ ");
+        line = custom_getline();
+        printf("You entered: %s\n", line);
+        free(line);
+    }
+    return 0;
+}
+

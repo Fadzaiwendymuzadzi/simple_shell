@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+#define BUFFER_SIZE 1024
+
+int main(void) {
+    char *command = "echo $$ # ls -la";
+
+    // Remove comments from command string
+
+    int status = system(command);
+    if (status == -1) {
+        perror("system command failed");
+        exit(1);
+    }
+
+    return 0;
+}
+

@@ -1,0 +1,12 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main(void) {
+    printf("Return status of last command: %d\n", WEXITSTATUS(system("ls /var")));
+    printf("Process ID of shell: %d\n", getpid());
+    printf("Process ID of parent of shell: %d\n", getppid());
+
+    return 0;
+}
+

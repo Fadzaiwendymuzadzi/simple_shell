@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+#define BUFFER_SIZE 1024
+
+int main(void) {
+    char *command1 = "ls /var";
+    char *command2 = "ls /hbtn";
+
+    int status;
+
+    if (fork() == 0) {
+        // Child process executes command1
+        if (system(command1) == 0) {
+            // If command1 succeeds, execute command2
+            system(command2);
+        }
+    } else {
+        // Parent process waits for child to finish
+        wait(&status);
+    }
+
+    return 0;
+}
+
