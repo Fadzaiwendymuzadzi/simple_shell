@@ -18,21 +18,21 @@
 #define BUF_FLUSH -1
 
 /* for command chaining */
-#define CMD_NORM 0
-#define CMD_OR 1
-#define CMD_AND	2
-#define CMD_CHAIN 3
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
 
 /* for convert_number() */
-#define CONVERT_LOWERCASE 1
-#define CONVERT_UNSIGNED 2
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
 
 /* 1 if using system getline() */
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
-#define HIST_FILE ".simple_shell_history"
-#define HIST_MAX 4096
+#define HIST_FILE	".simple_shell_history"
+#define HIST_MAX	4096
 
 extern char **environ;
 
@@ -45,14 +45,14 @@ extern char **environ;
  */
 typedef struct liststr
 {
-int num;
-char *str;
-struct liststr *next;
+	int num;
+	char *str;
+	struct liststr *next;
 } list_t;
 
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
- *allowing uniform prototype for function pointer struct
+ *		allowing uniform prototype for function pointer struct
  *@arg: a string generated from getline containing arguements
  *@argv: an array of strings generated from arg
  *@path: a string path for the current command
@@ -74,25 +74,25 @@ struct liststr *next;
  */
 typedef struct passinfo
 {
-char *arg;
-char **argv;
-char *path;
-int argc;
-unsigned int line_count;
-int err_num;
-int linecount_flag;
-char *fname;
-list_t *env;
-list_t *history;
-list_t *alias;
-char **environ;
-int env_changed;
-int status;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+	char **environ;
+	int env_changed;
+	int status;
 
-char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-int cmd_buf_type; /* CMD_type ||, &&, ; */
-int readfd;
-int histcount;
+	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	int readfd;
+	int histcount;
 } info_t;
 
 #define INFO_INIT \
@@ -106,8 +106,8 @@ int histcount;
  */
 typedef struct builtin
 {
-char *type;
-int (*func)(info_t *);
+	char *type;
+	int (*func)(info_t *);
 } builtin_table;
 
 
@@ -166,7 +166,7 @@ int is_delim(char, char *);
 int _isalpha(int);
 int _atoi(char *);
 
-/* toem_free.c */
+/* toem_errors1.c */
 int _erratoi(char *);
 void print_error(info_t *, char *);
 int print_d(int, int);
@@ -182,7 +182,7 @@ int _myhelp(info_t *);
 int _myhistory(info_t *);
 int _myalias(info_t *);
 
-/*toem_access.c */
+/*toem_getline.c */
 ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void sigintHandler(int);
@@ -232,4 +232,4 @@ int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
 
-#endif /* _SHELL_H_ */
+#endif
